@@ -1,0 +1,9 @@
+server:
+  port: 6002
+
+spring:
+  mysql:
+    driverClassName: com.mysql.jdbc.Driver
+    jdbcUrl: jdbc:mysql://localhost:3306/demo?useSSL=false
+    username: root
+    password:
