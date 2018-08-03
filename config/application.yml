@@ -7,7 +7,6 @@ spring:
     jdbcUrl: jdbc:mysql://localhost:3306/demo?useSSL=false
     username: root
     password:
-
   kafka:
     ip: localhost:9092
     customTopic:
@@ -15,3 +14,4 @@ spring:
     consumer:
       auto-offset-reset: earliest
       group-id: sk
+    # spring.kafka.consumer.auto-offset-reset=earliest
