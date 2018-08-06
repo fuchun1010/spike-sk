@@ -12,6 +12,7 @@
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>2.0.3.RELEASE</version>
+
     </parent>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -24,6 +25,7 @@
         <jackson.version>2.9.6</jackson.version>
         <mongo-bason>3.8.0</mongo-bason>
         <mysql.version>5.1.46</mysql.version>
+        <guava.version>19.0</guava.version>
     </properties>
     <dependencies>
         <dependency>
@@ -80,6 +82,11 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-jdbc</artifactId>
             <version>4.3.12.RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>${guava.version}</version>
         </dependency>
     </dependencies>
 </project>
