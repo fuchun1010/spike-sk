@@ -1,5 +1,6 @@
 package com.tank.controller;
 
+import com.tank.config.JsonWrapper;
 import com.tank.config.ThreadPoolConfig;
 import com.tank.domain.Person;
 import lombok.NonNull;
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,7 +32,9 @@ public class UserController {
     val location_id = 4;
     val sql = "select _name as name,_salory as salary from person where _location_id = ? limit ?";
     this.absorbData(sql, Arrays.asList(location_id, limit).toArray());
+
     val response = new DeferredResult<ResponseEntity>();
+
     response.setResult(ResponseEntity.status(HttpStatus.OK).build());
     return response;
   }
@@ -43,9 +47,9 @@ public class UserController {
         val name = rs.getString("name");
         val salary = rs.getBigDecimal("salary").doubleValue();
         val person = new Person().setName(name).setSalary(salary);
-        System.out.println(person.toString());
-        counter.incrementAndGet();
-        System.out.println("counter is:" + counter);
+        val json = JsonWrapper.obj2JsonStr(person);
+        json.ifPresent(str -> this.kafkaTemplate.send("test-consume",str));
+
       });
     });
     pool.shutdown();
@@ -57,6 +61,9 @@ public class UserController {
 
   @Autowired
   private ThreadPoolConfig threadPoolConfig;
+
+  @Autowired
+  private KafkaTemplate<String, String> kafkaTemplate;
 
   private volatile AtomicInteger counter = new AtomicInteger(0);
 
