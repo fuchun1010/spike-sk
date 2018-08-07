@@ -65,6 +65,6 @@ public class UserController {
   @Autowired
   private KafkaTemplate<String, String> kafkaTemplate;
 
-  private volatile AtomicInteger counter = new AtomicInteger(0);
+ 
 
 }
