@@ -18,3 +18,7 @@ spring:
     mongodb:
       uri: mongodb://localhost:27017/quickbi
     # spring.kafka.consumer.auto-offset-reset=earliest
+
+rest:
+  api:
+    chineseCities: https://search.heweather.com/top?key=7d826aa6040240c5ad96e0f5304b004a&group=cn
