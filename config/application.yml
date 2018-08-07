@@ -14,4 +14,7 @@ spring:
     consumer:
       auto-offset-reset: earliest
       group-id: sk
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/quickbi
     # spring.kafka.consumer.auto-offset-reset=earliest
